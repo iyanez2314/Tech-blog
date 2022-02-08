@@ -27,7 +27,7 @@ Comment.create({
 
 // * Delete /api/comment/:id
 router.delete('/:id', (req, res) => {
-
+Comment.destroy({})
 })
 
 module.exports = router;
