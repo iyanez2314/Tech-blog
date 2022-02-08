@@ -11,6 +11,17 @@ Blog.init(
             primaryKey: true,
             autoIncrement: true
         },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        blog_url : {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isURL: true
+            }
+        },
         blog_text: {
             type: DataTypes.STRING,
             allowNull: false,
