@@ -20,11 +20,15 @@ User.hasMany(Comment, {
 Comment.belongsTo(User, {
     foreignKey: 'id'
 })
+
+Comment.belongsTo(blog, {
+    foreignKey: 'blog_id'
+})
 // * end to comment relations
 
 // * blog relations
 blog.belongsTo(User, {
-    foreignKey: 'id'
+    foreignKey: 'user_id'
 })
 
 blog.hasMany(Comment, {
