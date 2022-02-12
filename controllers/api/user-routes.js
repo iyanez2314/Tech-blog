@@ -84,6 +84,10 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.post('logout', (req, res) => {
+
+});
+
 // * PUT /api/user/:id
 router.put('/:id', (req, res) => {
 User.update(req.body, {

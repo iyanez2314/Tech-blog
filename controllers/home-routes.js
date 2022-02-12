@@ -44,4 +44,45 @@ router.get('/login', (req, res) => {
     res.render('login');
 })
 
+router.get('/blog/:id', (req, res) => {
+   blog.findOne({
+       where: {
+           id: req.params.id
+       },
+       attributes: [
+           'id',
+           'blog_url',
+           'title'
+       ],
+       include : [
+           {
+               model: Comment,
+               attributes: ['id', 'comment_text', 'user_id'],
+               include: {
+                model: User,
+                attributes: ['username']
+               }
+           },
+           {
+               model: User,
+               attributes: ['username']
+           }
+       ]
+   })
+   .then(dbBlogData => {
+       if(!dbBlogData){
+           res.status(404).json({ message: 'No post found with this id' });
+           return;
+       }
+
+       const post = dbBlogData.get({ plain: true });
+
+       res.render('single-post', { blog });
+   })
+   .catch(err => {
+       console.log(err);
+       res.status(500).json(err);
+   })
+});
+
 module.exports = router;
