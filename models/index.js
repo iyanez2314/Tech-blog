@@ -1,39 +1,36 @@
 // * Importing all models
 const User = require('./user');
 const Comment = require('./comments');
-const blog = require('./blog-posts')
+const Posts = require('./posts')
 
-// * All the relations for each table
-
-
-// * User relations
-User.hasMany(blog, {
-    foreignKey: 'id'
-})
-
-User.hasMany(Comment, {
-    foreignKey: 'id'
-});
-// * end to the user relations
-
-// * Comment relations
-Comment.belongsTo(User, {
-    foreignKey: 'id'
-})
-
-Comment.belongsTo(blog, {
-    foreignKey: 'blog_id'
-})
-// * end to comment relations
-
-// * blog relations
-blog.belongsTo(User, {
+User.hasMany(Posts, {
     foreignKey: 'user_id'
-})
+  });
 
-blog.hasMany(Comment, {
-    foreignKey: 'id'
-})
-// * end to blog relations
 
-module.exports = { User, Comment, blog}
+  Posts.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+  });
+
+  Comment.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+  });
+  
+  Comment.belongsTo(Posts, {
+    foreignKey: 'post_id',
+    onDelete: 'SET NULL'
+  });
+  
+  User.hasMany(Comment, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+  });
+  
+  Posts.hasMany(Comment, {
+    foreignKey: 'post_id'
+  });
+
+
+module.exports = { User, Comment, Posts}

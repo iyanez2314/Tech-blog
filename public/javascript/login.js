@@ -18,7 +18,7 @@ async function signupFormHandler(event){
            headers: { 'Content-Type': 'application/json' }
        });
        if(response.ok){
-           console.log(success);
+           console.log('success');
        } else {
            alert(response.statusText)
        }
@@ -33,7 +33,7 @@ async function loginFormHandler(event){
     const password = document.querySelector('#password-login').value.trim();
 
     if(email && password){
-        const response = await fetch('/api/user/login', {
+        const response = await fetch('/api/users/login', {
             method: 'post',
             body: JSON.stringify({
                 email,
@@ -43,7 +43,7 @@ async function loginFormHandler(event){
         });
 
         if(response.ok){
-            console.log(success);
+            console.log('success');
         } else {
             alert(response.statusText);
         }
